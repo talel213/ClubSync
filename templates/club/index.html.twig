@@ -1,39 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Clubs Management - ClubHub
+{% block title %}Club index
 {% endblock %}
-
 {% block style %}
 	<style>
-
-		.btn-purple {
-			background-color: #6f42c1;
-			color: white;
-		}
-		.table thead {
-			background-color: #f8f9fa;
-		}
-		.sidebar-logo {
-			color: #6f42c1;
-			font-weight: bold;
-			font-size: 1.5rem;
-		}
-		.status-badge {
-			padding: 0.35em 0.65em;
-			font-size: 0.75em;
+		.sidebar {
+			background-color: #D8D8F6 !important;
 		}
 	</style>
 {% endblock %}
-
 {% block body %}
-	{% set clubs = clubs|default([]) %}
-	{% set total_clubs = total_clubs|default(0) %}
 
 	<div class="container-fluid">
-		<div
-			class="row">
-			<!-- Sidebar -->
-			<nav class="sidebar col-12 col-md-3 col-lg-2  p-3" style="background-color: #D8D8F6; height:100vh;">
+		<div class="row">
+			<nav class="sidebar col-12 col-md-3 col-lg-2  p-3 ">
 				<div class="sidebar-logo mb-4 px-3">ClubHub</div>
 				<ul class="nav flex-column">
 					<li class="nav-item">
@@ -62,8 +42,18 @@
 					</li>
 				</ul>
 			</nav>
+			<main class="col-12 col-md-9 col-lg-10 p-4">
+				<h1>Club index</h1>
 
-			<!-- Main content -->
+				<table class="table">
+					<thead>
+						<tr></tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+
+				<a href="{{ path('app_club_new') }}">Create new</a>
+			</main>
 			<main class="col-12 col-md-9 col-lg-10 p-4">
 				<div class="d-flex justify-content-between align-items-center mb-4">
 					<h1>Clubs Management</h1>
@@ -87,23 +77,22 @@
 				<table class="table table-hover align-middle">
 					<thead class="text-secondary">
 						<tr>
-							<th>ID</th>
-							<th>Club Name</th>
+							<th>Id</th>
+							<th>Name</th>
 							<th>Members</th>
 							<th>President</th>
 							<th>Foundation</th>
-							<th>Status</th>
-							<th>Actions</th>
+							<th>actions</th>
 						</tr>
 					</thead>
 					<tbody>
 						{% for club in clubs %}
 							<tr>
-								<td class="fw-bold">#{{ club.id }}</td>
-								<td>{{ club.name }}</td>
-								<td>{{ club.members }}</td>
-								<td>{{ club.president }}</td>
-								<td>{{ club.foundation }}</td>
+								<td class="fw-bold">{{ club.id }}</td>
+								<td>{{ club.Name }}</td>
+								<td>{{ club.Members }}</td>
+								<td>{{ club.President }}</td>
+								<td>{{ club.Foundation ? club.Foundation|date('Y-m-d') : '' }}</td>
 								<td>
 									{% if club.status == 'Active' %}
 										<span class="badge bg-success status-badge">Active</span>
@@ -112,11 +101,9 @@
 									{% endif %}
 								</td>
 								<td>
-									<div class="d-flex gap-2">
-										<a href="#" class="text-decoration-none">💶</a>
-										<a href="#" class="text-decoration-none">💷</a>
-										<a href="#" class="text-decoration-none">💸</a>
-									</div>
+									<a href="{{ path('app_club_show', {'id': club.id}) }}" class="btn btn-success">show</a>
+									<a href="{{ path('app_club_edit', {'id': club.id}) }}" class="btn btn-primary">edit</a>
+									<a href="{{ path('app_club_delete', {'id': club.id}) }}" class="btn btn-danger">delete</a>
 								</td>
 							</tr>
 						{% else %}
@@ -126,7 +113,6 @@
 						{% endfor %}
 					</tbody>
 				</table>
-
 				<div class="d-flex justify-content-between align-items-center mt-4">
 					<span class="text-secondary">
 						Showing 1 to
