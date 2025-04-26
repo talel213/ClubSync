@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 18 avr. 2025 à 15:40
+-- Généré le : sam. 26 avr. 2025 à 13:46
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -24,6 +24,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `club`
+--
+
+CREATE TABLE `club` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `members` int(11) NOT NULL,
+  `president` varchar(255) NOT NULL,
+  `foundation` date NOT NULL,
+  `status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `club`
+--
+
+INSERT INTO `club` (`id`, `name`, `members`, `president`, `foundation`, `status`) VALUES
+(1, 'enactus', 0, 'Talel', '2025-04-23', '');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `doctrine_migration_versions`
 --
 
@@ -38,7 +60,9 @@ CREATE TABLE `doctrine_migration_versions` (
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20250409114813', '2025-04-09 13:48:30', 172);
+('DoctrineMigrations\\Version20250409114813', '2025-04-09 13:48:30', 172),
+('DoctrineMigrations\\Version20250424102451', '2025-04-24 12:25:09', 67),
+('DoctrineMigrations\\Version20250426112247', '2025-04-26 13:44:04', 162);
 
 -- --------------------------------------------------------
 
@@ -84,6 +108,12 @@ INSERT INTO `user` (`id`, `username`, `email`, `password`, `role`) VALUES
 --
 
 --
+-- Index pour la table `club`
+--
+ALTER TABLE `club`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `doctrine_migration_versions`
 --
 ALTER TABLE `doctrine_migration_versions`
@@ -107,6 +137,12 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
+
+--
+-- AUTO_INCREMENT pour la table `club`
+--
+ALTER TABLE `club`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `messenger_messages`
