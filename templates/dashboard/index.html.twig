@@ -49,7 +49,7 @@
 						</a>
 					</li>
 					<li class="nav-item ">
-						<a class="nav-link text-secondary" href="#">
+						<a class="nav-link {{ app.request.attributes.get('_route') starts with 'app_event' ? 'bg-light text-primary border-end border-primary' : 'text-secondary' }}" href="{{ path('app_event_index') }}">
 							<i class="bi bi-calendar-event pe-2 fs-5"></i>
 							Events
 						</a>

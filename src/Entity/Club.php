@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\ClubRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ClubRepository::class)]
 class Club
@@ -15,23 +18,34 @@ class Club
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Name = null;
+    private ?string $name = null;
 
-    #[ORM\Column]
-    private ?int $Members = null;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $President = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $Foundation = null;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $members = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $status = "Active";
+    private ?string $president = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $foundation = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Choice(choices: ['Active', 'Inactive'], message: 'Invalid status value.')]
+    private ?string $status = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+    #[ORM\OneToMany(mappedBy: 'club', targetEntity: Event::class)]
+    private Collection $events;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -40,49 +54,56 @@ class Club
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): static
+    public function setName(string $name): static
     {
-        $this->Name = $Name;
+        $this->name = $name;
+        return $this;
+    }
 
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
         return $this;
     }
 
     public function getMembers(): ?int
     {
-        return $this->Members;
+        return $this->members;
     }
 
-    public function setMembers(int $Members): static
+    public function setMembers(int $members): static
     {
-        $this->Members = $Members;
-
+        $this->members = $members;
         return $this;
     }
 
     public function getPresident(): ?string
     {
-        return $this->President;
+        return $this->president;
     }
 
-    public function setPresident(string $President): static
+    public function setPresident(string $president): static
     {
-        $this->President = $President;
-
+        $this->president = $president;
         return $this;
     }
 
     public function getFoundation(): ?\DateTimeInterface
     {
-        return $this->Foundation;
+        return $this->foundation;
     }
 
-    public function setFoundation(\DateTimeInterface $Foundation): static
+    public function setFoundation(?\DateTimeInterface $foundation): static
     {
-        $this->Foundation = $Foundation;
-
+        $this->foundation = $foundation;
         return $this;
     }
 
@@ -94,7 +115,6 @@ class Club
     public function setStatus(string $status): static
     {
         $this->status = $status;
-
         return $this;
     }
 
@@ -103,11 +123,38 @@ class Club
         return $this->image;
     }
 
-    public function setImage(string $image): static
+    public function setImage(?string $image): static
     {
         $this->image = $image;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): static
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->setClub($this);
+        }
 
         return $this;
     }
 
+    public function removeEvent(Event $event): static
+    {
+        if ($this->events->removeElement($event)) {
+            if ($event->getClub() === $this) {
+                $event->setClub(null);
+            }
+        }
+
+        return $this;
+    }
 }

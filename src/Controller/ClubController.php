@@ -34,7 +34,7 @@ final class ClubController extends AbstractController
 
             if ($imageFile) {
                 // Create a safe name for the file
-                $fileName = uniqid() . '.' . $imageFile->guessExtension();
+                $fileName = uniqid('', true) . '.' . $imageFile->guessExtension();
 
                 // Move the file to the uploads folder
                 $imageFile->move(

@@ -3,38 +3,49 @@
 namespace App\Form;
 
 use App\Entity\Club;
+use App\Entity\Event;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
-class ClubType extends AbstractType
+class EventType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('description', TextType::class)
-            ->add('members', IntegerType::class)
-            ->add('president', TextType::class)
-            ->add('foundation', DateType::class, [
+            ->add('name')
+            ->add('description')
+            ->add('startDate', null, [
+                'widget' => 'single_text',
+            ])
+            ->add('startTime', TimeType::class, [
                 'widget' => 'single_text',
                 'required' => false,
             ])
+            ->add('endDate', null, [
+                'widget' => 'single_text',
+            ])
+            ->add('endTime', TimeType::class, [
+                'widget' => 'single_text',
+                'required' => false,
+            ])
+            ->add('location')
             ->add('status', ChoiceType::class, [
                 'choices' => [
-                    'Active' => 'Active',
-                    'Inactive' => 'Inactive',
+                    'Upcoming' => 'Upcoming',
+                    'Ongoing' => 'Ongoing',
+                    'Completed' => 'Completed',
+                    'Postponed' => 'Postponed',
                 ],
-                'data' => 'Active',
+                'data' => 'Upcoming', // default value
             ])
             ->add('image', FileType::class, [
-                'label' => 'Club Image',
+                'label' => 'Event Image',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -49,13 +60,17 @@ class ClubType extends AbstractType
                     ])
                 ],
             ])
+            ->add('club', EntityType::class, [
+                'class' => Club::class,
+                'choice_label' => 'name',
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Club::class,
+            'data_class' => Event::class,
         ]);
     }
 }
