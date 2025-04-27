@@ -33,115 +33,36 @@
 		<div
 			class="row">
 			<!-- Sidebar -->
-			<nav class="sidebar col-12 col-md-3 col-lg-2  p-3" style="background-color: #D8D8F6; height:100vh;">
+			<nav class="sidebar col-12 col-md-3 col-lg-2  p-3 " style="background-color: #EEF2FF; height:100vh;">
 				<div class="sidebar-logo mb-4 px-3">ClubHub</div>
 				<ul class="nav flex-column">
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_dashboard') }}">
-							<i class="bi bi-house"></i>
+						<a class="nav-link {{ app.request.attributes.get('_route') starts with 'app_dashboard' ? 'bg-light text-primary border-end border-primary' : 'text-secondary' }}" href="{{ path('app_dashboard') }}">
+							<i class="bi bi-house pe-2 fs-5"></i>
 							Dashboard
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link active text-purple" href="#">
-							<i class="bi bi-collection"></i>
+						<a class="nav-link {{ app.request.attributes.get('_route') starts with 'app_club' ? 'bg-light text-primary border-end border-primary' : 'text-secondary' }}" href="{{ path('app_club_index') }}">
+							<i class="bi bi-collection pe-2 fs-5"></i>
 							Clubs
 						</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							<i class="bi bi-calendar-event"></i>
+					<li class="nav-item ">
+						<a class="nav-link text-secondary" href="#">
+							<i class="bi bi-calendar-event pe-2 fs-5"></i>
 							Events
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">
-							<i class="bi bi-gear"></i>
+						<a class="nav-link text-secondary" href="#">
+							<i class="bi bi-gear pe-2 fs-5"></i>
 							Settings
 						</a>
 					</li>
 				</ul>
 			</nav>
 
-			<!-- Main content -->
-			<main class="col-12 col-md-9 col-lg-10 p-4">
-				<div class="d-flex justify-content-between align-items-center mb-4">
-					<h1>Clubs Management</h1>
-					<div class="d-flex gap-3 align-items-center">
-						<div class="input-group" style="width: 300px;">
-							<input type="text" class="form-control" placeholder="Search clubs...">
-							<button class="btn btn-outline-secondary">
-								<i class="fas fa-search"></i>
-							</button>
-						</div>
-						<select class="form-select" style="width: 120px;">
-							<option>Filter</option>
-						</select>
-						<a href="#" class="btn btn-purple">
-							<i class="fas fa-plus me-2"></i>
-							Add Club
-						</a>
-					</div>
-				</div>
-
-				<table class="table table-hover align-middle">
-					<thead class="text-secondary">
-						<tr>
-							<th>ID</th>
-							<th>Club Name</th>
-							<th>Members</th>
-							<th>President</th>
-							<th>Foundation</th>
-							<th>Status</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for club in clubs %}
-							<tr>
-								<td class="fw-bold">#{{ club.id }}</td>
-								<td>{{ club.name }}</td>
-								<td>{{ club.members }}</td>
-								<td>{{ club.president }}</td>
-								<td>{{ club.foundation }}</td>
-								<td>
-									{% if club.status == 'Active' %}
-										<span class="badge bg-success status-badge">Active</span>
-									{% else %}
-										<span class="badge bg-danger status-badge">inactive</span>
-									{% endif %}
-								</td>
-								<td>
-									<div class="d-flex gap-2">
-										<a href="#" class="text-decoration-none">💶</a>
-										<a href="#" class="text-decoration-none">💷</a>
-										<a href="#" class="text-decoration-none">💸</a>
-									</div>
-								</td>
-							</tr>
-						{% else %}
-							<tr>
-								<td colspan="7" class="text-center py-4">No clubs found.</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-
-				<div class="d-flex justify-content-between align-items-center mt-4">
-					<span class="text-secondary">
-						Showing 1 to
-						{{ clubs|length }}
-						of
-						{{ total_clubs }}
-						entries
-					</span>
-					<div class="btn-group">
-						<button class="btn btn-outline-secondary btn-sm">Previous</button>
-						<button class="btn btn-primary btn-sm">1</button>
-						<button class="btn btn-outline-secondary btn-sm">Next</button>
-					</div>
-				</div>
-			</main>
+			<h1>Helloo</h1>
 		</div>
-	</div>
-{% endblock %}
+	{% endblock %}

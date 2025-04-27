@@ -30,6 +30,21 @@ final class ClubController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('Image')->getData();
+
+            if ($imageFile) {
+                // Create a safe name for the file
+                $fileName = uniqid() . '.' . $imageFile->guessExtension();
+
+                // Move the file to the uploads folder
+                $imageFile->move(
+                    $this->getParameter('kernel.project_dir') . '/public/uploads',
+                    $fileName
+                );
+
+                // Save the file name into the database
+                $club->setImage($fileName);
+            }
             $entityManager->persist($club);
             $entityManager->flush();
 
@@ -71,7 +86,7 @@ final class ClubController extends AbstractController
     #[Route('/deleteClub/{id}', name: 'app_club_delete', methods: ['POST'])]
     public function delete(Request $request, Club $club, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$club->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $club->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($club);
             $entityManager->flush();
         }

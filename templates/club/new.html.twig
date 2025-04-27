@@ -1,11 +1,93 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Club{% endblock %}
+{% block title %}New Club
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Club</h1>
+	<div class="container-fluid">
+		<div
+			class="row">
+			<!-- Sidebar -->
+			<nav class="sidebar col-12 col-md-3 col-lg-2  p-3 " style="background-color: #EEF2FF; height:100vh;">
+				<div class="sidebar-logo mb-4 px-3">ClubHub</div>
+				<ul class="nav flex-column">
+					<li class="nav-item">
+						<a class="nav-link {{ app.request.attributes.get('_route') starts with 'app_dashboard' ? 'bg-light text-primary border-end border-primary' : 'text-secondary' }}" href="{{ path('app_dashboard') }}">
+							<i class="bi bi-house pe-2 fs-5"></i>
+							Dashboard
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ app.request.attributes.get('_route') starts with 'app_club' ? 'bg-light text-primary border-end border-primary' : 'text-secondary' }}" href="{{ path('app_club_index') }}">
+							<i class="bi bi-collection pe-2 fs-5"></i>
+							Clubs
+						</a>
+					</li>
+					<li class="nav-item ">
+						<a class="nav-link text-secondary" href="#">
+							<i class="bi bi-calendar-event pe-2 fs-5"></i>
+							Events
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-secondary" href="#">
+							<i class="bi bi-gear pe-2 fs-5"></i>
+							Settings
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<main class="col-12 col-md-9 col-lg-10 p-4">
+				<div class="d-flex justify-content-between align-items-center mb-4">
+					<h1>Add club</h1>
+				</div>
+				<hr>
 
-    {{ include('club/_form.html.twig') }}
+				{{ form_start(form, { 'attr': {'enctype': 'multipart/form-data'} }) }}
+				<div class="card p-4 shadow-sm rounded-3">
+					<div class="mb-3">
+						{{ form_label(form.Name) }}
+						{{ form_widget(form.Name, {'attr': {'class': 'form-control'}}) }}
+						{{ form_errors(form.Name) }}
+					</div>
 
-    <a href="{{ path('app_club_index') }}">back to list</a>
-{% endblock %}
+					<div class="mb-3">
+						{{ form_label(form.Members) }}
+						{{ form_widget(form.Members, {'attr': {'class': 'form-control'}}) }}
+						{{ form_errors(form.Members) }}
+					</div>
+
+					<div class="mb-3">
+						{{ form_label(form.President) }}
+						{{ form_widget(form.President, {'attr': {'class': 'form-control'}}) }}
+						{{ form_errors(form.President) }}
+					</div>
+
+					<div class="mb-3">
+						{{ form_label(form.Foundation) }}
+						{{ form_widget(form.Foundation, {'attr': {'class': 'form-control'}}) }}
+						{{ form_errors(form.Foundation) }}
+					</div>
+
+					<div class="mb-3">
+						{{ form_label(form.Status) }}
+						{{ form_widget(form.Status, {'attr': {'class': 'form-select'}}) }}
+						{{ form_errors(form.Status) }}
+					</div>
+
+					<div class="mb-3">
+						{{ form_label(form.Image) }}
+						{{ form_widget(form.Image, {'attr': {'class': 'form-control'}}) }}
+						{{ form_errors(form.Image) }}
+					</div>
+
+					<div class="d-flex justify-content-end">
+						<a href="{{ path('app_club_index') }}" class="btn btn-outline-secondary me-3">Back to list</a>
+						<button class="btn btn-primary">Save</button>
+					</div>
+				</div>
+				{{ form_end(form) }}
+
+
+			</main>
+		{% endblock %}
