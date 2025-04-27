@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b792fb51-8fd7-47fe-abf6-17510a661ea8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/controllers.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/controllers.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ClubController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ClubController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Club.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Club.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ClubType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ClubType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/club/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/club/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/club/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/club/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/club/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/club/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/club/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/club/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/dashboard/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clubsync_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/clubsync_db.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +210,7 @@
       <workItem from="1745018466985" duration="3342000" />
       <workItem from="1745106764437" duration="384000" />
       <workItem from="1745107153557" duration="633000" />
-      <workItem from="1745767290595" duration="7500000" />
+      <workItem from="1745767290595" duration="7729000" />
     </task>
     <servers />
   </component>
