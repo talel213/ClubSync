@@ -56,6 +56,7 @@ class ClubType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Club::class,
+            'csrf_protection' => false,
         ]);
     }
 }

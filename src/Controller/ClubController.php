@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Club;
+use App\Entity\Event;
+use App\Repository\EventRepository;
 use App\Form\ClubType;
 use App\Repository\ClubRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -105,4 +107,22 @@ final class ClubController extends AbstractController
 
         return $this->redirectToRoute('app_club_index', [], Response::HTTP_SEE_OTHER);
     }
+    #[Route('/user/show', name: 'app_club_show2')]
+    public function Show2(ClubRepository $clubRepository): Response
+    {
+        return $this->render('club/club.html.twig', [
+            'clubs' => $clubRepository->findAll(),
+        ]);
+    }
+    #[Route('/club/{id}', name: 'app_club_show_details', methods: ['GET'])]
+    public function showDetails(Club $club, EventRepository $eventRepository): Response
+    {
+        $events = $eventRepository->findBy(['club' => $club]);
+
+        return $this->render('club/show_details.html.twig', [
+            'club' => $club,
+            'events' => $events,
+        ]);
+    }
+
 }
