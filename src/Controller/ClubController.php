@@ -14,11 +14,23 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('admin/club')]
 final class ClubController extends AbstractController
 {
-    #[Route(name: 'app_club_index', methods: ['GET'])]
-    public function index(ClubRepository $clubRepository): Response
+    #[Route('/club', name: 'app_club_index', methods: ['GET'])]
+    public function index(ClubRepository $clubRepository, Request $request): Response
     {
+        $search = $request->query->get('search'); // Get the 'search' query parameter
+
+        if ($search) {
+            $clubs = $clubRepository->createQueryBuilder('c')
+                ->where('c.name LIKE :search')
+                ->setParameter('search', '%' . $search . '%')
+                ->getQuery()
+                ->getResult();
+        } else {
+            $clubs = $clubRepository->findAll();
+        }
+
         return $this->render('club/index.html.twig', [
-            'clubs' => $clubRepository->findAll(),
+            'clubs' => $clubs,
         ]);
     }
 
@@ -30,7 +42,7 @@ final class ClubController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $imageFile = $form->get('Image')->getData();
+            $imageFile = $form->get('image')->getData();
 
             if ($imageFile) {
                 // Create a safe name for the file
