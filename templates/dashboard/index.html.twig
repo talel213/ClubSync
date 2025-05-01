@@ -1,70 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Clubs Management - ClubHub
-{% endblock %}
-
-{% block style %}
-	<style>
-
-		.btn-purple {
-			background-color: #6f42c1;
-			color: white;
-		}
-		.table thead {
-			background-color: #f8f9fa;
-		}
-		.sidebar-logo {
-			color: #6f42c1;
-			font-weight: bold;
-			font-size: 1.5rem;
-		}
-		.status-badge {
-			padding: 0.35em 0.65em;
-			font-size: 0.75em;
-		}
-	</style>
-{% endblock %}
+{% block title %}Admin Dashboard{% endblock %}
 
 {% block body %}
-	{% set clubs = clubs|default([]) %}
-	{% set total_clubs = total_clubs|default(0) %}
-
 	<div class="container-fluid">
-		<div
-			class="row">
-			<!-- Sidebar -->
-			<nav class="sidebar col-12 col-md-3 col-lg-2  p-3 " style="background-color: #EEF2FF; height:100vh;">
-				<div class="sidebar-logo mb-4 px-3">ClubHub</div>
+		<div class="row">
+			<nav class="sidebar col-12 col-md-3 col-lg-2 p-3" style="background-color: #EEF2FF; height:100vh;">
+				<div class="sidebar-logo mb-4 px-3"><a  href="{{ path('app_home') }}">ClubSync</a></div>
 				<ul class="nav flex-column">
 					<li class="nav-item">
-						<a class="nav-link {{ app.request.attributes.get('_route') starts with 'app_dashboard' ? 'bg-light text-primary border-end border-primary' : 'text-secondary' }}" href="{{ path('app_dashboard') }}">
-							<i class="bi bi-house pe-2 fs-5"></i>
-							Dashboard
+						<a class="nav-link text-secondary" href="{{ path('app_dashboard') }}">
+							<i class="bi bi-house pe-2 fs-5"></i> Dashboard
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {{ app.request.attributes.get('_route') starts with 'app_club' ? 'bg-light text-primary border-end border-primary' : 'text-secondary' }}" href="{{ path('app_club_index') }}">
-							<i class="bi bi-collection pe-2 fs-5"></i>
-							Clubs
+						<a class="nav-link text-secondary" href="{{ path('app_club_index') }}">
+							<i class="bi bi-collection pe-2 fs-5"></i> Clubs
 						</a>
 					</li>
-					<li class="nav-item ">
-						<a class="nav-link {{ app.request.attributes.get('_route') starts with 'app_event' ? 'bg-light text-primary border-end border-primary' : 'text-secondary' }}" href="{{ path('app_event_index') }}">
-							<i class="bi bi-calendar-event pe-2 fs-5"></i>
-							Events
+					<li class="nav-item">
+						<a class="nav-link text-secondary" href="{{ path('app_event_index') }}">
+							<i class="bi bi-calendar-event pe-2 fs-5"></i> Events
 						</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link text-secondary" href="#">
-							<i class="bi bi-gear pe-2 fs-5"></i>
-							Settings
+							<i class="bi bi-gear pe-2 fs-5"></i> Settings
 						</a>
 					</li>
+
 				</ul>
 			</nav>
-			<div class="col-12 col-md-9 col-lg-10">
-				<h1>Helloo</h1>
-			</div>
-
+			<main class="col-12 col-md-9 col-lg-10 p-4">
+				<h1>Admin Dashboard</h1>
+				<p>Welcome to the admin dashboard. Use the sidebar to manage clubs and events.</p>
+			</main>
 		</div>
-	{% endblock %}
+	</div>
+{% endblock %}

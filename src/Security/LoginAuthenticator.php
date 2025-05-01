@@ -52,11 +52,15 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         if (in_array('ROLE_ADMIN', $roles)) {
             return new RedirectResponse($this->urlGenerator->generate('app_dashboard'));
         }
+<<<<<<< HEAD
         if (in_array('ROLE_USER', $roles)) {
             return new RedirectResponse($this->urlGenerator->generate('app_home'));
         }
 
         throw new \Exception('TODO: provide a valid redirect inside ' . __FILE__);
+=======
+        return new RedirectResponse($this->urlGenerator->generate('app_home'));
+>>>>>>> 7dd322a (version 4h mtaa sbeh)
     }
 
     protected function getLoginUrl(Request $request): string

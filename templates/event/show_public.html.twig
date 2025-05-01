@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event Details{% endblock %}
+
+{% block body %}
+    {% include "Navbar.html.twig" %}
+
+    <div class="container py-5">
+        <h1>{{ event.name }}</h1>
+        <p>{{ event.description }}</p>
+        <p>Start: {{ event.startDate ? event.startDate|date('Y-m-d') : '' }} {{ event.startTime ? event.startTime|date('H:i') : '' }}</p>
+        <p>End: {{ event.endDate ? event.endDate|date('Y-m-d') : '' }} {{ event.endTime ? event.endTime|date('H:i') : '' }}</p>
+        <p>Location: {{ event.location }}</p>
+        <p>Status: {{ event.status }}</p>
+        {% if event.image %}
+            <img src="{{ asset('uploads/' ~ event.image) }}" alt="Event Image" style="max-width: 300px;" />
+        {% endif %}
+        <a href="{{ path('app_club_show_details', {'id': event.club.id}) }}" class="btn btn-secondary mt-3">Back to Club</a>
+    </div>
+{% endblock %}

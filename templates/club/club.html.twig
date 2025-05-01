@@ -3,6 +3,7 @@
 {% block title %}Our Clubs{% endblock %}
 
 {% block body %}
+
     <style>
         .hover-link {
             position: relative;
@@ -26,27 +27,7 @@
             color: #0d6efd;
         }
     </style>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4 py-3">
-        <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="{{ path('app_home') }}">Iset Rades</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbarMain">
-                <ul class="navbar-nav gap-3">
-                    <li class="nav-item"><a class="nav-link hover-link text-dark fw-medium" href="{{ path('app_home') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link hover-link text-dark fw-medium" href="{{ path('app_club_show2') }}">Clubs</a></li>
-                    <li class="nav-item"><a class="nav-link hover-link text-dark fw-medium" href="#">Events</a></li>
-                    <li class="nav-item"><a class="nav-link hover-link text-dark fw-medium" href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="d-flex gap-2">
-                <a href="{{ path('app_signup') }}" class="btn btn-outline-secondary rounded-pill px-4">Sign up</a>
-                <a href="{{ path('app_login') }}" class="btn btn-primary rounded-pill px-4">Login</a>
-            </div>
-        </div>
-    </nav>
+    {% include "Navbar.html.twig" %}
 
     <div class="container py-5">
         <h2 class="text-center mb-4">Our Clubs</h2>
@@ -61,7 +42,11 @@
                             <h5 class="card-title">{{ club.name|capitalize }}</h5>
                             <p class="card-text">{{ club.description|length > 100 ? club.description[:100] ~ '...' : club.description }}</p>
                             <div class="mt-auto d-flex gap-2">
-                                <a href="#" class="btn btn-primary w-50">Join Now</a>
+                                {% if app.user %}
+                                    <a href="{{ path('app_club_join', {'id': club.id}) }}" class="btn btn-primary w-50">Join Now</a>
+                                {% else %}
+                                    <a href="{{ path('app_login') }}" class="btn btn-primary w-50">Login to Join</a>
+                                {% endif %}
                                 <a href="{{ path('app_club_show_details', {'id': club.id}) }}" class="btn btn-outline-primary w-50">Learn More</a>
                             </div>
                         </div>

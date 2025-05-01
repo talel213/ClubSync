@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
-{% endblock %}
+{% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
 	<style>
@@ -29,8 +28,11 @@
 	</style>
 
 	{% include "Navbar.html.twig" %}
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 7dd322a (version 4h mtaa sbeh)
 
 	<div class="py-5" style="background: linear-gradient(to right, #5c6b82, #d8d8d8); color: white;">
 		<div class="container">
@@ -38,7 +40,7 @@
 				<div class="col-md-8">
 					<h1 class="display-5 fw-semibold">Discover Your Passion at<br>ISET Rades</h1>
 					<p class="lead">Join Our Vibrant Community of Clubs and Events</p>
-					<a href="/clubs" class="btn btn-primary mt-3 px-4 py-2 rounded-pill shadow-sm">Explore Clubs</a>
+					<a href="{{ path('app_club_show2') }}" class="btn btn-primary mt-3 px-4 py-2 rounded-pill shadow-sm">Explore Clubs</a>
 				</div>
 			</div>
 		</div>
@@ -46,15 +48,13 @@
 
 	<div class="container py-5">
 		<h4 class="mb-4 fw-semibold">Popular Clubs</h4>
-		<div
-			class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-			<!-- Club Cards -->
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
 			{% for club in [
-            {'image':'enactus-logo.png', 'title':'Enactus', 'desc':'Explore the latest in technology and innovation'},
-            {'image':'IEEE.png', 'title':'IEEE', 'desc':'Build the future with hands-on engineering projects'},
-            {'image':'D.png', 'title':'Robotics Club', 'desc':'Design and build amazing robots'},
-            {'image':'R.png', 'title':'Digital Arts Club', 'desc':'Express creativity through digital media'}
-        ] %}
+				{'image':'enactus-logo.png', 'title':'Enactus', 'desc':'Explore the latest in technology and innovation'},
+				{'image':'IEEE.png', 'title':'IEEE', 'desc':'Build the future with hands-on engineering projects'},
+				{'image':'D.png', 'title':'Robotics Club', 'desc':'Design and build amazing robots'},
+				{'image':'R.png', 'title':'Digital Arts Club', 'desc':'Express creativity through digital media'}
+			] %}
 				<div class="col">
 					<div class="card h-100 border-0 shadow-sm">
 						<img src="{{ asset('images/' ~ club.image) }}" class="card-img-top" alt="{{ club.title }}">
@@ -62,7 +62,7 @@
 							<h6 class="card-title fw-bold mb-1">{{ club.title }}</h6>
 							<p class="card-text small text-muted">{{ club.desc }}</p>
 							<div class="mt-auto">
-								<a href="#" class="btn btn-primary btn-sm w-100 rounded-pill">Join Now</a>
+								<a href="{{ path('app_club_show2') }}" class="btn btn-primary btn-sm w-100 rounded-pill">Join Now</a>
 							</div>
 						</div>
 					</div>

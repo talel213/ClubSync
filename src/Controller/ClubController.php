@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Club;
-use App\Entity\Event;
-use App\Repository\EventRepository;
+use App\Entity\User;
 use App\Form\ClubType;
 use App\Repository\ClubRepository;
+use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,31 +14,31 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+<<<<<<< HEAD
 #[Route('admin/club')]
 #[IsGranted('ROLE_ADMIN')]
+=======
+>>>>>>> 7dd322a (version 4h mtaa sbeh)
 final class ClubController extends AbstractController
 {
-    #[Route('/club', name: 'app_club_index', methods: ['GET'])]
+    // Admin route: List clubs (only for admins)
+    #[Route('/admin/club', name: 'app_club_index', methods: ['GET'])]
     public function index(ClubRepository $clubRepository, Request $request): Response
     {
-        $search = $request->query->get('search'); // Get the 'search' query parameter
-
-        if ($search) {
-            $clubs = $clubRepository->createQueryBuilder('c')
+        $search = $request->query->get('search');
+        $clubs = $search
+            ? $clubRepository->createQueryBuilder('c')
                 ->where('c.name LIKE :search')
                 ->setParameter('search', '%' . $search . '%')
                 ->getQuery()
-                ->getResult();
-        } else {
-            $clubs = $clubRepository->findAll();
-        }
+                ->getResult()
+            : $clubRepository->findAll();
 
-        return $this->render('club/index.html.twig', [
-            'clubs' => $clubs,
-        ]);
+        return $this->render('club/index.html.twig', ['clubs' => $clubs]);
     }
 
-    #[Route('/addClub', name: 'app_club_new', methods: ['GET', 'POST'])]
+    // Admin route: Create new club (only for admins)
+    #[Route('/admin/club/new', name: 'app_club_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $club = new Club();
@@ -71,17 +71,11 @@ final class ClubController extends AbstractController
             'club' => $club,
             'form' => $form,
         ]);
+
     }
 
-    #[Route('/showClub/{id}', name: 'app_club_show', methods: ['GET'])]
-    public function show(Club $club): Response
-    {
-        return $this->render('club/show.html.twig', [
-            'club' => $club,
-        ]);
-    }
-
-    #[Route('/editClub/{id}', name: 'app_club_edit', methods: ['GET', 'POST'])]
+    // Admin route: Edit club (only for admins)
+    #[Route('/admin/club/{id}/edit', name: 'app_club_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Club $club, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ClubType::class, $club);
@@ -99,7 +93,8 @@ final class ClubController extends AbstractController
         ]);
     }
 
-    #[Route('/deleteClub/{id}', name: 'app_club_delete', methods: ['POST'])]
+    // Admin route: Delete club (only for admins)
+    #[Route('/admin/club/{id}', name: 'app_club_delete', methods: ['POST'])]
     public function delete(Request $request, Club $club, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $club->getId(), $request->getPayload()->getString('_token'))) {
@@ -109,24 +104,34 @@ final class ClubController extends AbstractController
 
         return $this->redirectToRoute('app_club_index', [], Response::HTTP_SEE_OTHER);
     }
-    #[Route('/user/show', name: 'app_club_show2')]
-    public function Show2(ClubRepository $clubRepository): Response
+    #[Route('admin/showClub/{id}', name: 'app_club_show', methods: ['GET'])]
+    public function show(Club $club): Response
+    {
+        return $this->render('club/show.html.twig', [
+            'club' => $club,
+        ]);
+    }
+    // Public route: List clubs (accessible to everyone)
+    #[Route('/clubs', name: 'app_club_show2', methods: ['GET'])]
+    public function show2(ClubRepository $clubRepository): Response
     {
         return $this->render('club/club.html.twig', [
             'clubs' => $clubRepository->findAll(),
         ]);
     }
+
+    // Public route: Show club details (accessible to everyone)
     #[Route('/club/{id}', name: 'app_club_show_details', methods: ['GET'])]
     public function showDetails(Club $club, EventRepository $eventRepository): Response
     {
         $events = $eventRepository->findBy(['club' => $club]);
-
         return $this->render('club/show_details.html.twig', [
             'club' => $club,
             'events' => $events,
         ]);
     }
 
+<<<<<<< HEAD
 }
 
 #[Route('/club')]
@@ -142,3 +147,21 @@ final class UserClubController extends AbstractController
 }
 
 
+=======
+    // Public route: Join club (restricted to logged-in users)
+    #[Route('/club/join/{id}', name: 'app_club_join', methods: ['GET'])]
+    public function join(Club $club, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            throw $this->createAccessDeniedException('You must be logged in to join a club.');
+        }
+        $club->addMember($user);
+        $entityManager->persist($club);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'You have joined ' . $club->getName() . '!');
+        return $this->redirectToRoute('app_club_show2');
+    }
+}
+>>>>>>> 7dd322a (version 4h mtaa sbeh)
