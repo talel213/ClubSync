@@ -157,4 +157,8 @@ class Club
 
         return $this;
     }
+
+    public function addMember(User $user)
+    {
+    }
 }
