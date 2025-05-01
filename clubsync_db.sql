@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
-<<<<<<< HEAD
--- Généré le : mer. 30 avr. 2025 à 23:47
-=======
--- Généré le : lun. 28 avr. 2025 à 01:17
->>>>>>> bfed15f56668c43377349aa81113276eae6142b0
+-- Généré le : jeu. 01 mai 2025 à 02:50
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -22,11 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
-<<<<<<< HEAD
 -- Base de données : `clubsync1`
-=======
--- Base de données : `clubsync_db`
->>>>>>> bfed15f56668c43377349aa81113276eae6142b0
 --
 
 -- --------------------------------------------------------
@@ -40,15 +32,9 @@ CREATE TABLE `club` (
   `name` varchar(255) NOT NULL,
   `members` int(11) NOT NULL,
   `president` varchar(255) NOT NULL,
-<<<<<<< HEAD
   `foundation` date DEFAULT NULL,
   `status` varchar(255) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-=======
-  `foundation` date NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
->>>>>>> bfed15f56668c43377349aa81113276eae6142b0
   `description` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -58,18 +44,7 @@ CREATE TABLE `club` (
 
 INSERT INTO `club` (`id`, `name`, `members`, `president`, `foundation`, `status`, `image`, `description`) VALUES
 (5, 'enactus', 3, 'talel', '2012-02-09', 'Active', '680e4f18af606.png', 'skffkfj'),
-<<<<<<< HEAD
 (6, 'IEEE', 3, 'talel', '2025-12-03', 'Active', '680eab803513f0.72375349.png', 'aaaaaaaaa');
-=======
-(7, 'iEEE', 5, 'yassine', '2025-04-09', 'club', '680e4f18af606.png', 'qnkjndjabzjdbakzjbdkazbdezbajkbed'),
-(8, 'iEEE', 5, 'yassine', '2025-04-09', 'club', '680e4f18af606.png', 'qnkjndjabzjdbakzjbdkazbdezbajkbed'),
-(9, 'iEEE', 5, 'yassine', '2025-04-09', 'club', '680e4f18af606.png', 'qnkjndjabzjdbakzjbdkazbdezbajkbed'),
-(10, 'iEEE', 5, 'yassine', '2025-04-09', 'club', '680e4f18af606.png', 'qnkjndjabzjdbakzjbdkazbdezbajkbed'),
-(11, 'iEEE', 5, 'yassine', '2025-04-09', 'club', '680e4f18af606.png', 'qnkjndjabzjdbakzjbdkazbdezbajkbed'),
-(12, 'iEEE', 5, 'yassine', '2025-04-09', 'club', '680e4f18af606.png', 'qnkjndjabzjdbakzjbdkazbdezbajkbed'),
-(13, 'iEEE', 5, 'yassine', '2025-04-09', 'club', '680e4f18af606.png', 'qnkjndjabzjdbakzjbdkazbdezbajkbed'),
-(21, 'IEEE', 5, 'yassine', '2025-04-15', 'Active', '680eb39d8db9f0.54843986.png', 'cdsnsljcnkdsnvlcsq');
->>>>>>> bfed15f56668c43377349aa81113276eae6142b0
 
 -- --------------------------------------------------------
 
@@ -94,12 +69,9 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20250427094200', '2025-04-27 11:42:11', 35),
 ('DoctrineMigrations\\Version20250427152939', '2025-04-27 17:29:47', 48),
 ('DoctrineMigrations\\Version20250427165833', '2025-04-27 19:00:07', 9),
-<<<<<<< HEAD
 ('DoctrineMigrations\\Version20250427171911', '2025-04-27 19:19:16', 6),
-('DoctrineMigrations\\Version20250430200701', '2025-04-30 22:07:15', 124);
-=======
-('DoctrineMigrations\\Version20250427171911', '2025-04-27 19:19:16', 6);
->>>>>>> bfed15f56668c43377349aa81113276eae6142b0
+('DoctrineMigrations\\Version20250430200701', '2025-04-30 22:07:15', 124),
+('DoctrineMigrations\\Version20250501002123', '2025-05-01 02:21:33', 25);
 
 -- --------------------------------------------------------
 
@@ -126,12 +98,7 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`id`, `club_id`, `name`, `description`, `start_date`, `end_date`, `location`, `status`, `image`, `start_time`, `end_time`) VALUES
-<<<<<<< HEAD
 (3, 5, 'Hackaton', 'skdsjdmlksmdlj', '2025-03-15', '2025-03-15', 'iset', 'Completed', '680e64c5cf2b23.95898800.png', '10:15:00', '12:00:00');
-=======
-(3, 5, 'Hackaton', 'skdsjdmlksmdlj', '2025-03-15', '2025-03-15', 'iset', 'Completed', '680e64c5cf2b23.95898800.png', '10:15:00', '12:00:00'),
-(4, 5, 'bhhsqcxb', 'qcs,sqjjcnqs', '2000-06-05', '2025-04-20', 'knljn', 'Upcoming', '680eada583bb97.92890799.jpg', '23:05:00', '05:25:00');
->>>>>>> bfed15f56668c43377349aa81113276eae6142b0
 
 -- --------------------------------------------------------
 
@@ -157,33 +124,20 @@ CREATE TABLE `messenger_messages` (
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-<<<<<<< HEAD
   `email` varchar(180) NOT NULL,
   `roles` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '(DC2Type:json)' CHECK (json_valid(`roles`)),
-  `password` varchar(255) NOT NULL
-=======
-  `username` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` varchar(255) NOT NULL
->>>>>>> bfed15f56668c43377349aa81113276eae6142b0
+  `username` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `user`
 --
 
-<<<<<<< HEAD
-INSERT INTO `user` (`id`, `email`, `roles`, `password`) VALUES
-(1, 'talelbengharbia213@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$zcjjPyc1J6aUQFnrFLngr.l6AHKEt900Y2y9No4r1b6fTLmqinMh2'),
-(2, 'exemple1@gmail.com', '[\"ROLE_USER\"]', '$2y$13$Kgh6XZdsup/mxpla2/5tseH7kAGwZZqxFbA9WMx7lamSEYLviEdJa');
-=======
-INSERT INTO `user` (`id`, `username`, `email`, `password`, `role`) VALUES
-(2, 'talel12', 'talelbengharbia213@gmail.com', '$2y$13$cgpSy4YjQk6eD9zy9ucJAOpFVsF3qU9gcm5l3OLsIyjHb0raFMjSK', 'Admin'),
-(3, 'aaaa', 'exemple@gmail.com', '$2y$13$4R9jx7b84njccANkjEIE1ezVQJCRJINN9VLs2A5OOZWqexFFqQswO', 'Student'),
-(4, 'exemple1', 'exemple1@gmail.com', '$2y$13$0LNmHNv6X5Kjs8KRESCNMu3FquRPubcWJSg8iScLlgmUdhjlKm8fa', 'Student'),
-(5, 'abab', 'exemple2@gmail.com', '$2y$13$KEcQMmSYENRiXOzMVYavZeD9JkRnJ3z1RmR7wZ6fSSAGGKM2DUme2', 'Student');
->>>>>>> bfed15f56668c43377349aa81113276eae6142b0
+INSERT INTO `user` (`id`, `email`, `roles`, `password`, `username`) VALUES
+(1, 'talelbengharbia213@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$zcjjPyc1J6aUQFnrFLngr.l6AHKEt900Y2y9No4r1b6fTLmqinMh2', 'talel'),
+(2, 'exemple1@gmail.com', '[\"ROLE_USER\"]', '$2y$13$Kgh6XZdsup/mxpla2/5tseH7kAGwZZqxFbA9WMx7lamSEYLviEdJa', ''),
+(3, 'exemple2@gmail.com', '[\"ROLE_USER\"]', '$2y$13$tz3Be/v4pprL1NczEDrVde29jvKB91AzlDZ9ALMf3wv9HoPxxAuvK', 'exemple2');
 
 --
 -- Index pour les tables déchargées
@@ -221,12 +175,8 @@ ALTER TABLE `messenger_messages`
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
-<<<<<<< HEAD
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UNIQ_IDENTIFIER_EMAIL` (`email`);
-=======
-  ADD PRIMARY KEY (`id`);
->>>>>>> bfed15f56668c43377349aa81113276eae6142b0
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -236,21 +186,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `club`
 --
 ALTER TABLE `club`
-<<<<<<< HEAD
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-=======
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
->>>>>>> bfed15f56668c43377349aa81113276eae6142b0
 
 --
 -- AUTO_INCREMENT pour la table `event`
 --
 ALTER TABLE `event`
-<<<<<<< HEAD
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-=======
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
->>>>>>> bfed15f56668c43377349aa81113276eae6142b0
 
 --
 -- AUTO_INCREMENT pour la table `messenger_messages`
@@ -262,11 +204,7 @@ ALTER TABLE `messenger_messages`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-<<<<<<< HEAD
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-=======
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
->>>>>>> bfed15f56668c43377349aa81113276eae6142b0
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Contraintes pour les tables déchargées

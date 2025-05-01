@@ -12,8 +12,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('admin/club')]
+#[IsGranted('ROLE_ADMIN')]
 final class ClubController extends AbstractController
 {
     #[Route('/club', name: 'app_club_index', methods: ['GET'])]
@@ -126,3 +128,17 @@ final class ClubController extends AbstractController
     }
 
 }
+
+#[Route('/club')]
+final class UserClubController extends AbstractController 
+{
+    #[Route('/', name: 'app_club_show2')]
+    public function Show(ClubRepository $clubRepository): Response
+    {
+        return $this->render('club/homeclub.html.twig', [
+            'clubs' => $clubRepository->findAll(),
+        ]);
+    }
+}
+
+
